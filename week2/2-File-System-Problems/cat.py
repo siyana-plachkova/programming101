@@ -1,5 +1,6 @@
 import sys
 
+
 def read_file():
     if len(sys.argv) > 1:
         filename = sys.argv[1]
@@ -13,4 +14,4 @@ def read_file():
         print("Give me a file to read.")
 
 if __name__ == '__main__':
-    print (read_file())
+    print(read_file())

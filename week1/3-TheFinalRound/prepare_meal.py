@@ -13,7 +13,7 @@ def prepare_meal(number):
     eggs = ""
     if number % 5 == 0:
         eggs = " and eggs"
-    
+
     return " ".join(["spam"] * max) + eggs
 
 if __name__ == '__main__':

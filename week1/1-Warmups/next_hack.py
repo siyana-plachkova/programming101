@@ -8,6 +8,7 @@ def to_binary(n):
         n //= 2
     return result[::-1]
 
+
 def next_hack(n):
     flag = False
 

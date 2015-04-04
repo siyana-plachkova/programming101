@@ -26,4 +26,4 @@ def matrix_bombing_plan(matrix):
     return output
 
 if __name__ == '__main__':
-    print(matrix_bombing_plan([[1,2,3], [4,5,6], [7,8,9]]))
+    print(matrix_bombing_plan([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))

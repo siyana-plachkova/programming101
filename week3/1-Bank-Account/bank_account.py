@@ -26,7 +26,6 @@ class BankAccount:
 
         self.story.append("Deposited " + str(amount) + "$")
 
-
     def acc_balance(self):
         self.story.append("Balance check -> " + str(self.balance) + "$")
 
@@ -48,8 +47,6 @@ class BankAccount:
         self.story.append("__int__ check -> " + str(self.balance) + "$")
 
         return self.balance
-
-
 
     def transfer_to(self, account, amount):
         if account.currency != self.currency:

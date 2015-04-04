@@ -1,5 +1,6 @@
 from group import group
 
+
 def max_consecutive(items):
     max_len = 0
     for grp in group(items):

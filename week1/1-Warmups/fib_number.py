@@ -1,6 +1,7 @@
 from to_number import to_number
 from fibonacci import fibonacci
 
+
 def fib_number(n):
     return to_number(fibonacci(n))
 

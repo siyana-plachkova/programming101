@@ -1,6 +1,7 @@
 from bank_account import BankAccount
 import unittest
 
+
 class BankAccountTest(unittest.TestCase):
 
     def setUp(self):
@@ -8,7 +9,7 @@ class BankAccountTest(unittest.TestCase):
 
     def test_init(self):
         with self.assertRaises(ValueError):
-            w_account = BankAccount("Rado", -100, "$")
+            BankAccount("Rado", -100, "$")
 
         self.assertTrue(isinstance(self.account, BankAccount))
         self.assertEqual(self.account.name, "Siyana")

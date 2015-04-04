@@ -1,7 +1,7 @@
 from sum_of_divisors import sum_of_divisors
 
+
 def is_prime(n):
-    
     if n < 0:
         n = abs(n)
 

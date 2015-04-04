@@ -1,5 +1,6 @@
 from palindrome import palindrome
 
+
 def p_score(n):
     if palindrome(n):
         return 1

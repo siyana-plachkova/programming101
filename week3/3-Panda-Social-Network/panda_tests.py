@@ -1,28 +1,23 @@
-# ivo.name() == "Ivo" # True
-# ivo.email() == "ivo@pandamail.com"  # True
-# ivo.gender() == "male" # True
-# ivo.isMale() == True # True
-# ivo.isFemale() == False # True
-
 import unittest
 from panda_social_network import Panda
+
 
 class TestPanda(unittest.TestCase):
 
     def setUp(self):
         self.ivo = Panda("Ivo", "ivo@pandamail.com", "male")
-    
+
     def test_init(self):
         self.assertTrue(isinstance(self.ivo, Panda))
 
         with self.assertRaises(ValueError):
-            not_panda = Panda("Pesho", "peshopandamail.com", "male")
+            Panda("Pesho", "peshopandamail.com", "male")
         with self.assertRaises(TypeError):
-            not_panda = Panda(10, "pesho@pandamail.com", "male")
+            Panda(10, "pesho@pandamail.com", "male")
         with self.assertRaises(TypeError):
-            not_panda = Panda("Pesho", 0, "male")
+            Panda("Pesho", 0, "male")
         with self.assertRaises(TypeError):
-            not_panda = Panda("Pesho", "pesho@pandamail.com", 9)
+            Panda("Pesho", "pesho@pandamail.com", 9)
 
     def test_get_name(self):
         self.assertEqual(self.ivo.get_name(), "Ivo")
@@ -40,7 +35,7 @@ class TestPanda(unittest.TestCase):
         self.assertFalse(self.ivo.isFemale())
 
     def test_str(self):
-        self.assertEqual(str(self.ivo), "name: Ivo email: ivo@pandamail.com gender: male" )
+        self.assertEqual(str(self.ivo), "name: Ivo email: ivo@pandamail.com gender: male")
 
     def test_eq(self):
         same_panda = Panda("Ivo", "ivo@pandamail.com", "male")

@@ -7,13 +7,13 @@ def prime_factorization(n):
             i += 1
         else:
             n //= i
-            if not i in factors.keys():
+            if i not in factors.keys():
                 factors[i] = 1
             else:
                 factors[i] += 1
 
     if n > 1:
-        if not n in factors.keys():
+        if n not in factors.keys():
             factors[n] = 1
         else:
             factors[n] += 1
@@ -22,5 +22,3 @@ def prime_factorization(n):
 
 if __name__ == '__main__':
     print(prime_factorization(356))
-
-

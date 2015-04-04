@@ -1,6 +1,7 @@
 import sys
 from random import randint
 
+
 def generate_numbers():
     filename = sys.argv[1]
     file = open(filename, "w+")

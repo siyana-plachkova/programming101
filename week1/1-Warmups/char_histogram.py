@@ -1,7 +1,7 @@
 def char_histogram(string):
     histogram = {}
     for ch in string:
-        if not ch in histogram.keys():
+        if ch not in histogram.keys():
             histogram[ch] = string.count(ch)
 
     return histogram

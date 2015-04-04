@@ -1,7 +1,7 @@
 def count_words(arr):
     result = {}
     for word in arr:
-        if not word in result.keys():
+        if word not in result.keys():
             result[word] = arr.count(word)
     return result
 

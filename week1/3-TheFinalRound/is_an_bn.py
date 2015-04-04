@@ -1,7 +1,7 @@
 def is_an_bn(word):
     word_half = len(word)//2
-    count_as=0
-    count_bs=0
+    count_as = 0
+    count_bs = 0
 
     if word_half == 0:
         return True

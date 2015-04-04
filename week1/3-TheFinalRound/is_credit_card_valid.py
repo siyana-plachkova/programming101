@@ -3,7 +3,7 @@ def sum_of_digits(n):
         n = abs(n)
     digits_sum = 0
     while n > 0:
-        digits_sum += n%10
+        digits_sum += n % 10
         n //= 10
     return digits_sum
 
@@ -12,11 +12,11 @@ def is_credit_card_valid(number):
     num_str = str(number)
 
     if len(num_str) % 2 == 0:
-         return False
-    
+        return False
+
     num_transformed = num_str[::-1]
     concat_new = ""
-    
+
     for ind in range(0, len(num_transformed)):
         if ind % 2 != 0:
             concat_new += str(int(num_transformed[ind]) * 2)
