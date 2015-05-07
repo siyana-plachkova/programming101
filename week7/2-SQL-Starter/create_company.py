@@ -22,6 +22,10 @@ class CreateCompany:
         self.db.commit()
         cursor.close()
 
+    def close_db(self):
+        self.db.close()
+
 if __name__ == '__main__':
     company = CreateCompany()
     company.fill_data()
+    company.close_db()

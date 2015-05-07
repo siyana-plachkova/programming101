@@ -45,7 +45,7 @@ class Crawler:
         return [link.get('href') for link in soup.find_all('a') if link.get('href')]
 
     def get_internal_links(self, links):
-        return [link for link in links if link.endswith(".start.bg/")]
+        return [link for link in links if "start.bg" in link]
 
     def get_external_links(self, links):
         return [link for link in links if "link.php" in link]
