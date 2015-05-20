@@ -75,6 +75,24 @@ class Database:
         self._cursor.execute(update_reset_pass_hash, (reset_pass_hash, username))
         self._conn.commit()
 
+    def get_reset_pass_hash(self, username):
+        get_reset_pass = "SELECT reset_password_hash FROM clients WHERE username = ? LIMIT 1"
+
+        self._cursor.execute(get_reset_pass, (username, ))
+
+        user = self._cursor.fetchone()
+
+        if user:
+            return user[0]
+
+        return False
+
+    def clear_reset_hash(self, username):
+        clear_reset_hash = "UPDATE clients SET reset_password_hash = ? WHERE username = ?"
+
+        self._cursor.execute(clear_reset_hash, (None, username))
+        self._conn.commit()
+
     def close(self):
         self._cursor.close()
         self._conn.close()

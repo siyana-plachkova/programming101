@@ -2,6 +2,7 @@ import getpass
 import re
 import hashlib
 import time
+import smtplib
 
 from sql_manager import Database
 from login_interface import LoginInterface
@@ -35,6 +36,10 @@ class Interface:
             elif command.startswith('send-reset-password'):
                 username = command.split(' ')[1]
                 self._send_reset_password(username)
+            elif command.startswith('reset-password'):
+                username = command.split(' ')[1]
+                self._reset_password(username)
+                self._database.clear_reset_hash(username)
             elif command == 'help':
                 self._help()
             elif command == 'exit':
@@ -77,7 +82,7 @@ class Interface:
                 entered_valid_pass = True
 
         if entered_valid_username and entered_valid_email and entered_valid_pass:
-            self._database.register(username, str(password))
+            self._database.register(username, email, str(password))
 
             print("Registration Successfull")
 
@@ -110,17 +115,53 @@ class Interface:
             print("This user does not exist.")
         else:
             # concat  username, email and password (random)
-            reset_string = username + email + time()
+            reset_string = username + email + str(time.time())
             # hash it (md5)
-            hash_object = hashlib.md5(reset_string.encode("utf-8"))
+            hash_object = hashlib.sha1(reset_string.encode("utf-8"))
             safety_hash_object = hash_object.hexdigest()
             # update the user in table with the reset pass hash
             self._database.update_reset_pass(safety_hash_object, username)
-            # make a method sending email :D
+            # make a method sending email
+            self._send_reset_password_email(username)
+
+    def _send_reset_password_email(self, username):
+        to = self._database.get_user_email(username)
+        subject = 'RESET PASSWORD'
+        text = 'Here is your new account password.' + self._database.get_reset_pass_hash(username)
+
+        # Gmail Sign In
+        gmail_sender = 'codetestsemail@gmail.com'
+        file = open('pass.txt', 'r')
+        for line in file:
+            gmail_passwd = line
+
+        server = smtplib.SMTP('smtp.gmail.com:587')
+        server.ehlo()
+        server.starttls()
+        server.login(gmail_sender, gmail_passwd)
+
+        BODY = '\r\n'.join(['To: %s' % to,
+                            'From: %s' % gmail_sender,
+                            'Subject: %s' % subject, '', text])
+        try:
+            server.sendmail(gmail_sender, [to], BODY)
+            print('email sent')
+        except:
+            print('error sending mail')
+
+        server.quit()
+
+    def _reset_password(self, username):
+        recieved_password = input("Enter the password we sent you by email: ")
+
+        if recieved_password == self._database.get_reset_pass_hash(username):
+            pass
 
     def _help(self):
         print("login - for logging in!")
         print("register - for creating new account!")
+        print("send-reset-password - to request for a new password ")
+        print("reset-password - to reset your password")
         print("exit - for closing program!")
 
 

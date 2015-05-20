@@ -29,5 +29,7 @@ class Password:
         return self.hash()
 
     def hash(self):
+        # use salt/blowfish
         hash_object = hashlib.sha1(self._password.encode("utf-8"))
+        # hash_object.update((password + salt).encode('utf-8'))
         return hash_object.hexdigest()
