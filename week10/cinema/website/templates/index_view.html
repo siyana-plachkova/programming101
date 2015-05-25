@@ -1,0 +1,19 @@
+<h1>Movies and projections:</h1>
+
+{% for movie in movies %}
+
+<h2>{{ movie.name }}</h2>
+
+<p>Rating of the movie: {{ movie.rating }}</p>
+
+<strong>Projections:</strong>
+<ul>
+{% for projection in movie.projections.all %}
+  <li>{{ projection.date_time | date:"Y-m-d \a\t H:i" }} - {{ projection.projection_type }}</li>
+{% empty %}
+No projections to show.
+{% endfor %}
+</ul>
+{% empty %}
+No movies to show.
+{% endfor %}
